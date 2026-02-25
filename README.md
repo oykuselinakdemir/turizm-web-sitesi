@@ -19,6 +19,18 @@ To improve my frontend development skills and practice basic web design principl
 - Multi-page website structure
 - Navigation menu
 - Interactive elements with JavaScript
+## Project Structure
+The website consists of 10 different pages including:
+- Home
+- About
+- Routes
+- Included
+- Calculator
+- Food
+- Team
+- FAQ
+- Contacts
+- Book
 ## Screenshots
 ![Page 1](page1.png)
 ![Page 2](page2.png)
