@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Rotalar - Ankara & Karadeniz Tours</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Ortak stil dosyan (varsa) -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- İnce ve modern font (Japan Tours tarzı) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #f9fafb;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #fef3c7 0, #0b1020 40%, #020617 80%);
+    }
+
+    /* Arka plan fotoğrafı
+       Not: Gerçekte images/anitkabir-bg.jpg gibi relative kullanman daha iyi.
+    */
+    .bg-image {
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.92)),
+        url("images/Anıtkabir ✨.jpg") center/cover no-repeat;
+      z-index: -1;
+      filter: brightness(0.95);
+    }
+
+   
+
+    /* Üst bar – Japan Tours havası */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      border: 2px solid #ffffff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      font-size: 0.85rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.06em;
+      font-weight: 300;
+      transition: 0.25s;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+      opacity: 1;
+    }
+
+    .nav-button {
+      padding: 6px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.1);
+      color: #ffffff;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+    }
+
+    .page-wrapper {
+  max-width: 1100px;
+  margin: 120px auto 60px;
+  padding: 0 24px;
+  padding-right: 320px;   /* 🔹 sağa ekstra boşluk – side-photo için */
+}
+
+    .section-label {
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      font-size: 0.78rem;
+      color: #e5e7eb;
+      opacity: 0.75;
+      font-weight: 400;
+    }
+
+    .page-title {
+      font-size: 2.1rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #f9fafb;
+      margin: 6px 0 6px;
+      font-weight: 300;
+    }
+
+    .intro-text {
+      max-width: 720px;
+      font-size: 0.92rem;
+      color: #e5e7eb;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .divider {
+      margin: 26px 0 22px;
+      border-bottom: 1px solid rgba(148,163,184,0.6);
+    }
+
+    /* Rota blokları */
+    .route-section {
+      margin-bottom: 40px;
+    }
+
+    .route-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .route-title {
+      color: #f9fafb;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    .route-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #a5b4fc;
+      opacity: 0.9;
+    }
+
+    .route-days p {
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+
+    .note {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      font-weight: 300;
+    }
+
+    /* Galeri */
+    .route-gallery {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .route-gallery img {
+      width: 170px;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid rgba(248,250,252,0.4);
+      box-shadow: 0 10px 25px rgba(15,23,42,0.6);
+      background: rgba(15,23,42,0.6);
+    }
+
+    .gallery-caption {
+      font-size: 0.72rem;
+      color: #cbd5f5;
+      margin-top: 4px;
+      opacity: 0.85;
+    }
+
+    @media (max-width: 900px) {
+  .top-bar { padding-inline: 16px; }
+  .nav-links { display: none; }
+  .page-wrapper { 
+    margin-top: 90px; 
+    padding-inline: 18px; 
+    padding-right: 18px;   /* 🔹 küçük ekranda boşluğu geri al */
+  }
+}
+
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-image"></div>
+  <div class="side-photo"></div>
+
+  <!-- Üst bar -->
+  <header class="top-bar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span>Ankara & Karadeniz Tours</span>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="rotalar.html">Routes</a>
+      <a href="included.html">Included</a>
+      <a href="hesaplama2.html">Calculator</a>
+      <a href="yemekbolumu.html">Food</a>
+      <a href="team.html">Team</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contacts</a>
+    </nav>
+    <a class="nav-button" href="book.html">Book</a>
+  </header>
+
+  <main class="page-wrapper">
+    <div class="section-label">Routes</div>
+    <h1 class="page-title">TOUR ROUTES</h1>
+    <p class="intro-text">
+      Ankara çıkışlı Karadeniz ve Ankara çevresi turlarımız; doğa, tarih ve şehir
+      gezilerini bir araya getiren farklı programlardan oluşur. Aşağıda her rotanın
+      gün gün planını ve o rotaya ait küçük bir görsel galeri örneğini görebilirsiniz.
+    </p>
+
+    <div class="divider"></div>
+
+    <!-- ROTA 1 – DOĞU KARADENİZ KLASİK -->
+    <section class="route-section" data-image="images/Uzungöl.jpg">
+      <div class="route-header">
+        <h3 class="route-title">Rota 1 – Doğu Karadeniz Klasik</h3>
+        <span class="route-tag">5 Gün · Doğa & Kültür</span>
+      </div>
+
+      <p class="intro-text" style="font-size:0.9rem;">
+        Karadeniz’i ilk kez keşfedecek misafirler için ideal bir programdır. Trabzon,
+        Rize ve Giresun hattında hem sahil şehirlerini hem de manzara noktalarını
+        bir arada sunar.
+      </p>
+
+      <div class="route-days">
+        <p class="intro-text" style="font-size:0.9rem;">
+          <strong>Gün 1–2:</strong> Ankara’dan gece yolculuğu, sabah Trabzon’a varış.
+          Ayasofya Camii, Boztepe manzarası ve sahil yürüyüşü. Akşam konaklama Trabzon.
+        </p>
+        <p class="intro-text" style="font-size:0.9rem;">
+          <strong>Gün 3–4:</strong> Rize merkeze geçiş, çay fabrikası gezisi, şehir
+          içi tur ve serbest zaman. Akşam konaklama Rize veya çevresinde.
+        </p>
+        <p class="intro-text" style="font-size:0.9rem;">
+          <strong>Gün 5:</strong> Giresun’a geçiş, kale ve ada manzarası, kısa şehir
+          turu ve alışveriş molası. Akşam saatlerinde dönüş yolculuğu ve Ankara’ya varış.
+        </p>
+        <p class="note">
+          Program; hava durumu ve yol durumuna göre rehber tarafından küçük değişikliklerle güncellenebilir.
+        </p>
+      </div>
+
+      <div class="route-gallery">
+        <div>
+          <img src="images/Trabzon ganita sahil.jpg" alt="Trabzon sahil ve şehir manzarası">
+          <div class="gallery-caption">Trabzon sahil hattı</div>
+        </div>
+        <div>
+          <img src="images/Rize.jpg" alt="Rize çay tarlaları">
+          <div class="gallery-caption">Rize çay bahçeleri</div>
+        </div>
+        <div>
+          <img src="images/📍Mavi Göl_Giresun.jpg" alt="Giresun manzarası">
+          <div class="gallery-caption">Giresun mavi göl manzarası</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ROTA 2 – YAYLA & DOĞA TURU -->
+    <section class="route-section" data-image="images/Rize2.jpg">
+      <div class="route-header">
+        <h3 class="route-title">Rota 2 – Yayla &amp; Doğa Turu</h3>
+        <span class="route-tag">4 Gün · Yayla & Yürüyüş</span>
+      </div>
+
+      <p class="intro-text" style="font-size:0.9rem;">
+        Sis denizi, gün doğumu ve yüksek rakımlı yaylalar eşliğinde daha doğa odaklı
+        bir rota arayanlar için hazırlanmıştır. Ayder, Pokut ve Huser gibi bölgeleri kapsar.
+      </p>
+
+      <div class="route-days">
+        <p class="intro-text" style="font-size:0.9rem;">
+          <strong>Gün 1:</strong> Ankara’dan çıkış, Rize’ye varış, Ayder Yaylası’nda
+          serbest zaman ve kısa yürüyüş parkurları.
+        </p>
+        <p class="intro-text" style="font-size:0.9rem;">
+          <strong>Gün 2:</strong> Pokut &amp; Sal yaylalarında sis denizi manzarası,
+          fotoğraf molaları ve yöresel yemekler. Akşam yayla konaklaması.
+        </p>
+        <p class="intro-text" style="font-size:0.9rem;">
+          <strong>Gün 3–4:</strong> Huser yaylasında gün doğumu veya gün batımı izleme,
+          kamp alanı ziyareti (isteğe bağlı), dönüşte çay fabrikası ve kısa şehir turu.
+        </p>
+        <p class="note">
+          Rota; yürüyüş ve hafif trekking içerdiği için rahat ayakkabı ve hava durumuna uygun kıyafet önerilir.
+        </p>
+      </div>
+
+      <div class="route-gallery">
+        <div>
+          <img src="images/Ayder Yaylası Rize  🇹🇷 💚 💙 ♥️ 🇹🇷 ♥️ 💙 🇹🇷_.jpg" alt="Ayder yaylası manzarası">
+          <div class="gallery-caption">Ayder yaylası</div>
+        </div>
+        <div>
+          <img src="images/Huser sis denizi.jpg" alt="Sis denizi manzarası">
+          <div class="gallery-caption">Sis denizi manzaraları</div>
+        </div>
+        <div>
+          <img src="images/Rize Huser Yaylası.jpg" alt="Huser yaylası gün batımı">
+          <div class="gallery-caption">Huser gün batımı</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ROTA 3 – KARADENİZ + BATUM -->
+    <section class="route-section" data-image="images/batum.jpg">
+      <div class="route-header">
+        <h3 class="route-title">Rota 3 – Karadeniz + Batum</h3>
+        <span class="route-tag">4 Gün · Kültür & Şehir</span>
+      </div>
+
+      <p class="intro-text" style="font-size:0.9rem;">
+        Karadeniz’in ardından Gürcistan’ın Batum şehrini de görmek isteyenler için
+        hazırlanmış karma bir programdır. Şehir gezileri ve sahil bulvarı ağırlıklıdır.
+      </p>
+
+      <div class="route-days">
+        <p class="intro-text" style="font-size:0.9rem;">
+          <strong>Gün 1–2:</strong> Trabzon ve Rize şehir turları, sahil yürüyüşleri,
+          çay fabrikası ziyareti ve serbest zaman.
+        </p>
+        <p class="intro-text" style="font-size:0.9rem;">
+          <strong>Gün 3:</strong> Sarp sınır kapısından geçiş, Batum şehir merkezi, sahil bulvarı,
+          meydanlar ve botanik bahçe gezisi.
+        </p>
+        <p class="intro-text" style="font-size:0.9rem;">
+          <strong>Gün 4:</strong> Serbest zaman ve alışveriş, akşam üzeri dönüş
+          yolculuğu ve Ankara’ya varış.
+        </p>
+        <p class="note">
+          Batum rotası için geçerli kimlik veya pasaport zorunludur; sınır geçişi süresi programa dahildir.
+        </p>
+      </div>
+
+      <div class="route-gallery">
+        <div>
+          <img src="images/manzara.jpg" alt="Batum sahil bulvarı">
+          <div class="gallery-caption">Batum sahil bulvarı</div>
+        </div>
+        <div>
+          <img src="images/Rize çay çarşısı.jpg" alt="Rize Çay çarşısı">
+          <div class="gallery-caption">Rize Çay Çarşısı</div>
+        </div>
+        <div>
+          <img src="images/FIRTINA DERESİ.jpg" alt="Fırtına Deresi">
+          <div class="gallery-caption">Fırtına Deresi</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ANKARA ŞEHİR TURU -->
+    <section class="route-section" data-image="images/ankara.jpg">
+      <div class="route-header">
+        <h3 class="route-title">Ankara Şehir Turu</h3>
+        <span class="route-tag">2 Gün · Tarih & Şehir</span>
+      </div>
+
+      <p class="intro-text" style="font-size:0.9rem;">
+        Cumhuriyet tarihini, müzeleri ve tarihi semtleri görmek isteyenler için
+        hazırlanan Ankara merkezli kısa bir şehir turudur.
+      </p>
+
+      <div class="route-days">
+        <p class="intro-text" style="font-size:0.9rem;">
+          <strong>Gün 1:</strong> Ankara Kalesi, Rahmi Koç Müzesi ve Hamamönü sokakları.
+          Geleneksel el sanatları ve kahve molaları.
+        </p>
+        <p class="intro-text" style="font-size:0.9rem;">
+          <strong>Gün 2:</strong> Etnografya Müzesi, Anadolu Medeniyetleri Müzesi,
+          Hacı Bayram Veli Camii ve Ulus Cumhuriyet Meydanı.
+        </p>
+        <p class="note">
+          Tarih & kültür ağırlıklı, yürüyüş dostu bir programdır; rahat ayakkabı önerilir.
+        </p>
+      </div>
+
+      <div class="route-gallery">
+        <div>
+          <img src="images/Turkey _ One photo per post.jpg" alt="Ankara Kalesi manzarası">
+          <div class="gallery-caption">Ankara Kalesi</div>
+        </div>
+        <div>
+          <img src="images/TÜRKİYE’NİN MASAL GİBİ  FOTOĞRAF’LARI geçmişten günümüze _ Hamamönü Ankara _ Facebook.jpg" alt="Hamamönü sokakları">
+          <div class="gallery-caption">Hamamönü sokakları</div>
+        </div>
+        <div>
+          <img src="images/Republic Museum in Ankara-Ulus.jpg" alt="Müze içi görüntüsü">
+          <div class="gallery-caption">Müze ziyaretleri</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ANITKABİR TURU -->
+    <section class="route-section" data-image="images/anıtkabir.jpg">
+      <div class="route-header">
+        <h3 class="route-title">Anıtkabir Turu</h3>
+        <span class="route-tag">Günlük · Anı & Tarih</span>
+      </div>
+
+      <p class="intro-text" style="font-size:0.9rem;">
+        Atatürk’ün mozolesini ve Kurtuluş Savaşı Müzesi’ni ziyaret eden, anlamı yüksek
+        bir günlük gezi programıdır.
+      </p>
+
+      <div class="route-days">
+        <p class="intro-text" style="font-size:0.9rem;">
+          <strong>Gün:</strong> Aslanlı Yol, Atatürk’ün Mozolesi, Barış Kulesi, İstiklal
+          ve Hürriyet Kuleleri, Atatürk ve Kurtuluş Savaşı Müzesi ziyareti.
+        </p>
+        <p class="note">
+          Program boyunca rehber, Cumhuriyet’in kuruluş sürecini ve dönemin tarihini anlatır.
+        </p>
+      </div>
+
+      <div class="route-gallery">
+        <div>
+          <img src="images/Anıtkabir Reflection.jpg" alt="Anıtkabir genel görüntü">
+          <div class="gallery-caption">Anıtkabir genel görünüm</div>
+        </div>
+        <div>
+          <img src="images/Anıtkabir bahçesi Aslanlı Yol 24 tane aslan heykeli 24 Oğuz boyunu, aslanların çift olması _birlik ve beraberliği_ ,kedi gibi yatmaları _barışı_ temsil ediyor.jpg" alt="Aslanlı Yol">
+          <div class="gallery-caption">Aslanlı Yol</div>
+        </div>
+        <div>
+          <img src="images/Anıtkabir 🖤.jpg" alt="İç mekan ve müze alanı">
+          <div class="gallery-caption">Müze alanı</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- BEYPAZARI TURU -->
+    <section class="route-section" data-image="images/Beypazarı.jpg">
+      <div class="route-header">
+        <h3 class="route-title">Beypazarı Turu</h3>
+        <span class="route-tag">Günlük · Tarihi İlçe</span>
+      </div>
+
+      <p class="intro-text" style="font-size:0.9rem;">
+        Tarihi evler, yöresel lezzetler ve butik sokaklar ile Ankara’ya yakın
+        ve keyifli bir günlük kaçış rotasıdır.
+      </p>
+
+      <div class="route-days">
+        <p class="intro-text" style="font-size:0.9rem;">
+          <strong>Gün:</strong> Beypazarı tarihi evleri, İnözü Vadisi manzara noktaları,
+          Yöresel El Sanatları Çarşısı, havuç lokumu tadımı ve serbest zaman.
+        </p>
+        <p class="note">
+          Alışveriş için geniş serbest zaman tanınır; yerel ürünler ve hediyelik
+          eşyalar için ideal bir duraktır.
+        </p>
+      </div>
+
+      <div class="route-gallery">
+        <div>
+          <img src="images/Beypazarı'nda Gezilecek Yerler.jpg" alt="Beypazarı tarihi evleri">
+          <div class="gallery-caption">Tarihi Beypazarı evleri</div>
+        </div>
+        <div>
+          <img src="images/indir (24)5.jpg" alt="Çarşı ve sokaklar">
+          <div class="gallery-caption">Çarşı ve sokaklar</div>
+        </div>
+        <div>
+          <img src="images/Inözü Valley _ The Green Canyon of Birds.jpg" alt="İnözü vadisi manzarası">
+          <div class="gallery-caption">İnözü Vadisi</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- HAYMANA KAPLICA TURU -->
+    <section class="route-section" data-image="images/saat.jpg">
+      <div class="route-header">
+        <h3 class="route-title">Haymana Kaplıca Turu</h3>
+        <span class="route-tag">Günlük · Termal & Wellness</span>
+      </div>
+
+      <p class="intro-text" style="font-size:0.9rem;">
+        Dinlenme ve yenilenme odaklı; termal su tesislerinde zaman geçirmeyi
+        seven misafirler için hazırlanmış bir günlük programdır.
+      </p>
+
+      <div class="route-days">
+        <p class="intro-text" style="font-size:0.9rem;">
+          <strong>Gün:</strong> Haymana termal tesisleri, sıcak su havuzları, spa &amp;
+          masaj uygulamaları, kısa doğa yürüyüşü rotaları ve dinlenme molaları.
+        </p>
+        <p class="note">
+          Havuz kullanım ekipmanları ve kişisel ihtiyaçlarınız için yanınızda havlu,
+          terlik ve uygun kıyafet bulundurmanız önerilir.
+        </p>
+      </div>
+
+      <div class="route-gallery">
+        <div>
+          <img src="images/indir (25)1.jpg" alt="Termal havuz görüntüsü">
+          <div class="gallery-caption">Termal havuz alanları</div>
+        </div>
+        <div>
+          <img src="images/20+ Relaxing Basement Spa Ideas for Your Home.jpg" alt="Spa ve dinlenme alanı">
+          <div class="gallery-caption">Spa & dinlenme alanları</div>
+        </div>
+        <div>
+          <img src="images/indir (26)1.jpg" alt="Doğa yürüyüşü alanları">
+          <div class="gallery-caption">Doğa yürüyüşü rotaları</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const sidePhoto = document.querySelector('.side-photo');
+    const sections = document.querySelectorAll('.route-section');
+
+    // Scroll izleyici – hangi rota ekranda ise onu aktif sayacağız
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const imgPath = entry.target.dataset.image;
+
+          if (imgPath) {
+            sidePhoto.style.background = `
+              linear-gradient(to bottom, rgba(15,23,42,0.15), rgba(15,23,42,0.65)),
+              url('${imgPath}') center/cover no-repeat
+            `;
+          }
+        }
+      });
+    }, {
+      threshold: 0.4   // Rota bloğunun %40'ı görünüyorsa "aktif" say
+    });
+
+    sections.forEach(sec => observer.observe(sec));
+  </script>
+</body>
+</html>
+
+
+

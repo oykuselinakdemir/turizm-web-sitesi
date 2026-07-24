@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book - Ankara & Karadeniz Tours</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-url: url("images/karadeniz2.jpeg");
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #f9fafb;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #fef3c7 0, #0b1020 40%, #020617 80%);
+    }
+
+    .bg-image {
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.92)),
+        var(--bg-url) center/cover no-repeat;
+      z-index: -1;
+      filter: brightness(0.95);
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      border: 2px solid #ffffff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      font-size: 0.85rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.06em;
+      font-weight: 300;
+      transition: 0.25s;
+    }
+
+    .nav-links a:hover { color: #ffffff; opacity: 1; }
+
+    .nav-button {
+      display: inline-block;
+      padding: 6px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.1);
+      color: #ffffff;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .page-wrapper {
+      max-width: 1100px;
+      margin: 120px auto 60px;
+      padding: 0 24px;
+    }
+
+    .section-label {
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      font-size: 0.78rem;
+      color: #e5e7eb;
+      opacity: 0.75;
+      font-weight: 400;
+    }
+
+    .page-title {
+      font-size: 2.1rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #f9fafb;
+      margin: 6px 0 6px;
+      font-weight: 300;
+    }
+
+    .intro-text {
+      max-width: 720px;
+      font-size: 0.92rem;
+      color: #e5e7eb;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .divider {
+      margin: 26px 0 18px;
+      border-bottom: 1px solid rgba(148,163,184,0.6);
+    }
+
+    .card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 18px;
+      padding: 22px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+    }
+
+    .card h2 {
+      margin: 0 0 10px 0;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 400;
+      color: #f9fafb;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .top-bar { padding-inline: 16px; }
+      .nav-links { display: none; }
+      .page-wrapper { margin-top: 90px; padding-inline: 18px; }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+
+    /* Book sayfası butonu (arkadaşının sayfasındaki yeşil butonu koruyup sizin stile yaklaştırdım) */
+    .card button {
+      width: 100%;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.15);
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+    .card button:hover {
+      background: rgba(255,255,255,0.25);
+      transform: translateY(-1px);
+    }
+    .card label {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #e5e7eb;
+      opacity: 0.9;
+      font-weight: 400;
+      margin: 10px 0 6px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="bg-image"></div>
+
+  <header class="top-bar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span>Ankara & Karadeniz Tours</span>
+    </div>
+
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="rotalar.html">Routes</a>
+      <a href="included.html">Included</a>
+      <a href="hesaplama2.html">Calculator</a>
+      <a href="yemekbolumu.html">Food</a>
+      <a href="team.html">Team</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contacts</a>
+    </nav>
+
+    <a class="nav-button" href="book.html">Book</a>
+  </header>
+
+  <main class="page-wrapper">
+    <div class="section-label">Reservation</div>
+    <h1 class="page-title">Book</h1>
+
+
+    <p class="intro-text">
+      Tur tarihinizi ve tercihlerinizi seçerek hızlıca rezervasyon oluşturabilirsiniz.
+      Formdaki bilgiler örnek amaçlıdır.
+    </p>
+    <div class="divider"></div>
+
+    <section class="card">
+      <h2>Reservation form</h2>
+      <form>
+<label>Tur Tarihi</label>
+<input type="date"/>
+<label>Kişi Sayısı</label>
+<select>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+</select>
+<label>Telefon</label>
+<input type="tel"/>
+<button>REZERVASYON YAP</button>
+</form>
+    </section>
+
+  </main>
+
+  <script>
+    // Küçük "aktif menü" desteği (isterseniz kaldırabilirsiniz)
+    (function() {
+      const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        const href = (a.getAttribute('href') || '').toLowerCase();
+        if (href === path) {
+          a.style.color = '#ffffff';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

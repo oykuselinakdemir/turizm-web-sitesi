@@ -1,0 +1,74 @@
+/* FORM GÖRÜNÜMÜ – TÜM SAYFADA GEÇERLİ (HESAPLAMA SAYFASI DA DAHİL) */
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.4);
+  
+  background: rgba(255,255,255,0.12);  /* saydam beyaz */
+  backdrop-filter: blur(8px);
+
+  color: #ffffff;
+  font-size: 0.9rem;
+
+  transition: 0.25s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255,255,255,0.65);
+}
+
+select option {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+/* Hover ve focus efektleri */
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #ffffff;
+  background: rgba(255,255,255,0.2);
+  outline: none;
+}
+
+/* Ek aktivitelerdeki checkbox'ların mavi rengini düzelt */
+.extras input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  accent-color: #ffffff;  /* artık mavi değil, beyaz */
+  cursor: pointer;
+}
+
+/* Sağ tarafta sabit dikey fotoğraf */
+.side-photo {
+  position: fixed;
+  top: 130px;
+  right: 40px;
+
+  width: 240px;        /* genişlik */
+  height: 70vh;        /* uzunluk */
+  border-radius: 28px;
+
+  background:
+    linear-gradient(to bottom, rgba(15,23,42,0.15), rgba(15,23,42,0.65)),
+    url("images/Uzungöl.jpg") center/cover no-repeat;
+
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.7);
+  backdrop-filter: blur(6px);
+
+  z-index: 5;  /* yazıların arkasında değil, üstünde duracak */
+}
+
+/* Küçük ekranlarda gizle */
+@media (max-width: 900px) {
+  .side-photo {
+    display: none;
+  }
+}

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ - Ankara & Karadeniz Tours</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root { --bg-url: url("images/karadeniz2.jpeg"); }
+    * { box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family:"Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:#f9fafb;
+      min-height:100vh;
+      background: radial-gradient(circle at top, #fef3c7 0, #0b1020 40%, #020617 80%);
+    }
+    .bg-image{
+      position:fixed; inset:0;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.92)),
+        var(--bg-url) center/cover no-repeat;
+      z-index:-1;
+      filter:brightness(0.95);
+    }
+    .top-bar{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 40px;
+      backdrop-filter:blur(14px);
+      background:rgba(255,255,255,0.05);
+      border-bottom:1px solid rgba(255,255,255,0.12);
+      position:fixed; top:0; left:0; right:0;
+      z-index:50;
+    }
+    .brand{
+      display:flex; align-items:center; gap:8px;
+      font-weight:300;
+      letter-spacing:0.14em;
+      text-transform:uppercase;
+      font-size:0.85rem;
+      color:rgba(255,255,255,0.85);
+    }
+    .brand-dot{
+      width:12px; height:12px;
+      border-radius:999px;
+      border:2px solid #ffffff;
+    }
+    .nav-links{ display:flex; gap:26px; font-size:0.85rem; flex-wrap:wrap; }
+    .nav-links a{
+      text-decoration:none;
+      color:rgba(255,255,255,0.85);
+      letter-spacing:0.06em;
+      font-weight:300;
+      transition:0.25s;
+      white-space:nowrap;
+    }
+    .nav-links a:hover{ color:#ffffff; opacity:1; }
+    .nav-button{
+      display:inline-block;
+      padding:6px 20px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.6);
+      background:rgba(255,255,255,0.1);
+      color:#ffffff;
+      font-size:0.8rem;
+      letter-spacing:0.1em;
+      cursor:pointer;
+      backdrop-filter:blur(6px);
+      text-decoration:none;
+      white-space:nowrap;
+    }
+    .page-wrapper{
+      max-width:1100px;
+      margin:120px auto 60px;
+      padding:0 24px;
+    }
+    .section-label{
+      text-transform:uppercase;
+      letter-spacing:0.26em;
+      font-size:0.78rem;
+      color:#e5e7eb;
+      opacity:0.75;
+      font-weight:400;
+    }
+    .page-title{
+      font-size:2.1rem;
+      letter-spacing:0.3em;
+      text-transform:uppercase;
+      color:#f9fafb;
+      margin:6px 0 6px;
+      font-weight:300;
+    }
+    .intro-text{
+      max-width:720px;
+      font-size:0.92rem;
+      color:#e5e7eb;
+      opacity:0.9;
+      font-weight:300;
+      line-height:1.55;
+    }
+    .divider{
+      margin:26px 0 18px;
+      border-bottom:1px solid rgba(148,163,184,0.6);
+    }
+    .card{
+      background:rgba(255,255,255,0.07);
+      border:1px solid rgba(255,255,255,0.16);
+      border-radius:18px;
+      padding:22px;
+      backdrop-filter:blur(10px);
+      box-shadow:0 18px 40px rgba(0,0,0,0.45);
+    }
+    .faq-item{
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.14);
+      border-radius:16px;
+      padding:14px;
+      margin-bottom:12px;
+    }
+    .faq-q{
+      margin:0;
+      font-size:0.9rem;
+      text-transform:uppercase;
+      letter-spacing:0.12em;
+      font-weight:400;
+    }
+    .faq-a{
+      margin:8px 0 0 0;
+      font-size:0.9rem;
+      color:#e5e7eb;
+      opacity:0.9;
+      font-weight:300;
+      line-height:1.55;
+    }
+    .mini-link{
+      display:inline-block;
+      margin-top:8px;
+      font-size:0.82rem;
+      letter-spacing:0.08em;
+      text-decoration:none;
+      color:#ffffff;
+      opacity:0.9;
+      border-bottom:1px solid rgba(255,255,255,0.35);
+      padding-bottom:2px;
+      transition:0.25s;
+    }
+    .mini-link:hover{ opacity:1; border-bottom-color: rgba(255,255,255,0.8); }
+    @media (max-width:900px){
+      .top-bar{ padding-inline:16px; }
+      .nav-links{ display:none; }
+      .page-wrapper{ margin-top:90px; padding-inline:18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-image"></div>
+  <header class="top-bar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span>Ankara & Karadeniz Tours</span>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="rotalar.html">Routes</a>
+      <a href="included.html">Included</a>
+      <a href="hesaplama2.html">Calculator</a>
+      <a href="yemekbolumu.html">Food</a>
+      <a href="team.html">Team</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contacts</a>
+    </nav>
+    <a class="nav-button" href="book.html">Book</a>
+  </header>
+
+  <main class="page-wrapper">
+    <div class="section-label">FAQ</div>
+    <h1 class="page-title">SIK SORULANLAR</h1>
+    <p class="intro-text">
+      Aşağıdaki sorular, turlara ilk kez katılan misafirlerimizden en çok gelen konuları özetler.
+      Detaylı bilgi için iletişim sayfasından bize ulaşabilirsin.
+    </p>
+
+    <div class="divider"></div>
+
+    <section class="card">
+      <div class="faq-item">
+        <h3 class="faq-q">Batum rotası için pasaport gerekir mi?</h3>
+        <p class="faq-a">Sarp sınır kapısından geçiş için geçerli kimlik kartı veya pasaport gerekir. Süreç yoğunluğa göre değişebilir.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-q">Turlarda kahvaltı dahil mi?</h3>
+        <p class="faq-a">Standart paketlerde rota boyunca kahvaltı ve rehberlik dahildir. Öğle/akşam yemekleri rota ve pakete göre değişir.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-q">Hava durumuna göre program değişir mi?</h3>
+        <p class="faq-a">Evet. Güvenlik ve ulaşım koşulları için rehber, küçük saat değişiklikleri veya alternatif duraklar önerebilir.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-q">Rezervasyon nasıl yapılır?</h3>
+        <p class="faq-a">Book sayfasından formu doldurabilir veya Contacts sayfasından bize ulaşıp rezervasyon oluşturabilirsin.</p>
+        <a class="mini-link" href="book.html">Book sayfasına git</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Food - Ankara &amp; Karadeniz Tours</title>
+<link href="style.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root {
+      --bg-url: url("images/yemek.jpeg");
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #f9fafb;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #fef3c7 0, #0b1020 40%, #020617 80%);
+    }
+
+    .bg-image {
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.92)),
+        var(--bg-url) center/cover no-repeat;
+      z-index: -1;
+      filter: brightness(0.95);
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      border: 2px solid #ffffff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      font-size: 0.85rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.06em;
+      font-weight: 300;
+      transition: 0.25s;
+    }
+
+    .nav-links a:hover { color: #ffffff; opacity: 1; }
+
+    .nav-button {
+      display: inline-block;
+      padding: 6px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.1);
+      color: #ffffff;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .page-wrapper {
+      max-width: 1100px;
+      margin: 120px auto 60px;
+      padding: 0 24px;
+    }
+
+    .section-label {
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      font-size: 0.78rem;
+      color: #e5e7eb;
+      opacity: 0.75;
+      font-weight: 400;
+    }
+
+    .page-title {
+      font-size: 2.1rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #f9fafb;
+      margin: 6px 0 6px;
+      font-weight: 300;
+    }
+
+    .intro-text {
+      max-width: 720px;
+      font-size: 0.92rem;
+      color: #e5e7eb;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .divider {
+      margin: 26px 0 18px;
+      border-bottom: 1px solid rgba(148,163,184,0.6);
+    }
+
+    .card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 18px;
+      padding: 22px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+    }
+
+    .card h2 {
+      margin: 0 0 10px 0;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 400;
+      color: #f9fafb;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .top-bar { padding-inline: 16px; }
+      .nav-links { display: none; }
+      .page-wrapper { margin-top: 90px; padding-inline: 18px; }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+
+    /* Arkadaşının yemek içeriğini sizin tasarıma uydur */
+    .card .small-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      color: #e5e7eb;
+      opacity: 0.75;
+      margin-bottom: 8px;
+    }
+    .card .page-title { 
+      font-size: 1.6rem; 
+      letter-spacing: 0.22em;
+      margin: 6px 0 16px;
+    }
+    .food-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .food-card{
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .food-card h3{
+      margin: 0 0 8px 0;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 400;
+    }
+    .food-card p{
+      margin: 0;
+      font-size: 0.88rem;
+      color: #e5e7eb;
+      opacity: 0.9;
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+  
+    /* --- Fix: Food page image layout --- */
+    .food-card{
+      overflow: hidden;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .food-card img{
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 12px;
+      display:block;
+    }
+    .food-text h3{ margin: 0 0 6px 0; }
+    .food-text{ display:flex; flex-direction:column; gap: 6px; }
+</style>
+</head>
+<body>
+<div class="bg-image"></div>
+<header class="top-bar">
+<div class="brand">
+<span class="brand-dot"></span>
+<span>Ankara &amp; Karadeniz Tours</span>
+</div>
+<nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="rotalar.html">Routes</a>
+      <a href="included.html">Included</a>
+      <a href="hesaplama2.html">Calculator</a>
+      <a href="yemekbolumu.html">Food</a>
+      <a href="team.html">Team</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contacts</a>
+    </nav>
+<a class="nav-button" href="book.html">Book</a>
+</header>
+<main class="page-wrapper">
+<div class="section-label">Local cuisine</div>
+<h1 class="page-title">Food</h1>
+<p class="intro-text">
+      Karadeniz mutfağından seçtiğimiz birkaç klasik lezzet. (Sayfa içerikleri örnek amaçlıdır.)
+    </p>
+<div class="divider"></div>
+<section class="card">
+<div class="container">
+<div class="small-title">LOCAL CUISINE</div>
+<div class="page-title">KARADENİZ YEMEKLERİ</div>
+<div class="food-grid">
+<div class="food-card">
+<img alt="Kuymak" src="images/kuymak.jpeg"/>
+<div class="food-text">
+<h3>Kuymak (Mıhlama)</h3>
+<p>MKuymak, Trabzon ve Rize başta olmak üzere Karadeniz yaylalarında sıklıkla tüketilen, mısır unu, tereyağı ve peynirle hazırlanan geleneksel bir yemektir. Genellikle kahvaltılarda sıcak olarak servis edilir ve bölgeye gelen ziyaretçilerin mutlaka denemesi gereken lezzetler arasında yer alır.</p>
+</div>
+</div>
+<div class="food-card">
+<img alt="Karalahana Sarması" src="images/dolma.jpeg"/>
+<div class="food-text">
+<h3>Karalahana Sarması</h3>
+<p>Karalahana sarması, Artvin, Trabzon ve Rize yöresinde yapılan, karalahana yapraklarıyla hazırlanan doyurucu bir yemektir. Öğle ve akşam yemeklerinde tercih edilir ve Karadeniz mutfağının en besleyici yemeklerinden biri olarak bilinir.</p>
+</div>
+</div>
+<div class="food-card">
+<img alt="Hamsili Pilav" src="images/hamsi.jpeg"/>
+<div class="food-text">
+<h3>Hamsili Pilav</h3>
+<p>Hamsili pilav, özellikle Trabzon ve Ordu çevresinde kış aylarında yapılan, hamsi balığıyla hazırlanan geleneksel bir Karadeniz yemeğidir. Hem balık hem pilavın birlikte sunulmasıyla bölge mutfağının özgün lezzetlerinden biri olma özelliği taşır.</p>
+</div>
+</div>
+<div class="food-card">
+<img alt="Laz Böreği" src="images/börek.jpeg"/>
+<div class="food-text">
+<h3>Laz Böreği</h3>
+<p>Laz böreği, Rize ve Artvin yöresine özgü, muhallebi dolgulu ve şerbetli olarak hazırlanan tatlı bir börektir. Genellikle çay saatlerinde ikram edilir ve Karadeniz mutfağının en bilinen tatlıları arasında yer alır.</p>
+</div>
+</div>
+<div class="food-card">
+<img alt="Akçaabat Köftesi" src="images/köfte.jpeg"/>
+<div class="food-text">
+<h3>Akçaabat Köftesi</h3>
+<p>Akçaabat köftesi, Trabzon’un Akçaabat ilçesine özgü, yumuşak dokulu ve mangalda pişirilen meşhur bir köfte çeşididir. Öğle ve akşam yemeklerinde servis edilir ve Karadeniz mutfağının en tanınmış et yemeklerinden biri olarak kabul edilir.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<script>
+    // Küçük "aktif menü" desteği (isterseniz kaldırabilirsiniz)
+    (function() {
+      const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        const href = (a.getAttribute('href') || '').toLowerCase();
+        if (href === path) {
+          a.style.color = '#ffffff';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

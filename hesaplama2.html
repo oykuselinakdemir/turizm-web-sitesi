@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Tur Fiyatı Hesaplama</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Ortak stil dosyan -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- İnce ve modern font (Japan Tours tarzı) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #f9fafb;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #fef3c7 0, #0b1020 40%, #020617 80%);
+    }
+
+    .bg-image {
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.92)),
+        url("images/ChatGPT Image 9 Ara 2025 16_29_36.png") center/cover no-repeat;
+      z-index: -1;
+      filter: brightness(0.95);
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      border: 2px solid #ffffff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      font-size: 0.85rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.06em;
+      font-weight: 300;
+      transition: 0.25s;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+      opacity: 1;
+    }
+
+    .nav-button {
+      padding: 6px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.1);
+      color: #ffffff;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+    }
+
+    .page-wrapper {
+      max-width: 1100px;
+      margin: 120px auto 60px;
+      padding: 0 24px;
+    }
+
+    .section-label {
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      font-size: 0.78rem;
+      color: #e5e7eb;
+      opacity: 0.75;
+      font-weight: 400;
+    }
+
+    .page-title {
+      font-size: 2.1rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #f9fafb;
+      margin: 6px 0 6px;
+      font-weight: 300;
+    }
+
+    .intro-text {
+      max-width: 620px;
+      font-size: 0.92rem;
+      color: #e5e7eb;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .divider {
+      margin: 26px 0 18px;
+      border-bottom: 1px solid rgba(148,163,184,0.6);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #e5e7eb;
+      opacity: 0.9;
+      font-weight: 400;
+    }
+
+    .note {
+      font-size: 0.72rem;
+      color: #9ca3af;
+      font-weight: 300;
+    }
+
+    .extras {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .extras label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      padding: 6px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      cursor: pointer;
+      font-weight: 400;
+      transition: 0.25s ease;
+    }
+
+    .extras label:hover {
+      background: rgba(255,255,255,0.22);
+    }
+
+    .btn-row {
+      margin-top: 22px;
+    }
+
+    .calc-btn {
+      padding: 10px 36px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.5);
+      cursor: pointer;
+      background: rgba(255,255,255,0.15);
+      color: #ffffff;
+      font-weight: 400;
+      font-size: 0.9rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      backdrop-filter: blur(6px);
+      transition: 0.3s ease;
+    }
+
+    .calc-btn:hover {
+      background: rgba(255,255,255,0.25);
+      border-color: rgba(255,255,255,0.8);
+      transform: translateY(-2px);
+    }
+
+    .result-box {
+      margin-top: 26px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(148,163,184,0.7);
+      display: none;
+    }
+
+    .result-title {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.82rem;
+      color: #bbf7d0;
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+
+    .result-box p {
+      margin: 3px 0;
+      font-size: 0.9rem;
+      color: #e5e7eb;
+      font-weight: 300;
+    }
+
+    .highlight {
+      color: #facc15;
+      font-weight: 500;
+      margin-top: 6px;
+    }
+
+    .kisi-basi {
+      color: #a5b4fc;
+    }
+
+    @media (max-width: 720px) {
+      .top-bar { padding-inline: 16px; }
+      .nav-links { display: none; }
+      .page-wrapper { margin-top: 90px; padding-inline: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-image"></div>
+
+  <header class="top-bar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span>Ankara & Karadeniz Tours</span>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="rotalar.html">Routes</a>
+      <a href="included.html">Included</a>
+      <a href="hesaplama2.html">Calculator</a>
+      <a href="yemekbolumu.html">Food</a>
+      <a href="team.html">Team</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contacts</a>
+    </nav>
+    <a class="nav-button" href="book.html">Book</a>
+  </header>
+
+  <main class="page-wrapper">
+    <div class="section-label">Price calculator</div>
+    <h1 class="page-title">TOURS</h1>
+    <p class="intro-text">
+      Ankara çıkışlı Karadeniz ve Ankara çevresi turlarınız için rota, konaklama, ulaşım
+      ve ek aktiviteleri seçin. Aşağıdaki hesaplayıcı, toplam tur ücretini ve kişi başı
+      ortalama maliyeti otomatik olarak hesaplar.
+    </p>
+
+    <div class="divider"></div>
+
+    <section>
+      <div class="form-grid">
+        <div class="field">
+          <label for="rota">Rota</label>
+          <select id="rota">
+            <option value="klasik">Doğu Karadeniz Klasik (Rize–Trabzon–Giresun)</option>
+            <option value="yayla">Yayla &amp; Doğa Turu (Ayder–Pokut–Huser)</option>
+            <option value="batum">Karadeniz + Batum</option>
+            <option value="Ankara">Ankara Şehir Turu</option>
+            <option value="Anıtkabir Turu">Anıtkabir Turu</option>
+            <option value="Beypazarı">Beypazarı Turu</option>
+            <option value="Haymana">Haymana Kaplıca Turu</option>
+          </select>
+          <span class="note">Tüm rotalarda kahvaltı ve rehberlik dahildir.</span>
+        </div>
+
+        <div class="field">
+          <label for="konaklama">Konaklama tipi</label>
+          <select id="konaklama">
+            <option value="standart">Standart otel</option>
+            <option value="butik">Butik otel</option>
+            <option value="bungalov">Bungalov ev</option>
+          </select>
+          <span class="note">Konaklama tipine göre kişi başı ek ücret eklenir.</span>
+        </div>
+
+        <div class="field">
+          <label for="ulasim">Ulaşım</label>
+          <select id="ulasim">
+            <option value="otobus">Otobüs (Ankara çıkışlı)</option>
+            <option value="ucak">Uçak + transfer</option>
+          </select>
+          <span class="note">Uçak seçeneğinde ekstra ulaşım ücreti uygulanır.</span>
+        </div>
+
+        <div class="field">
+          <label for="yetiskin">Yetişkin sayısı</label>
+          <input type="number" id="yetiskin" min="1" value="2">
+          <label for="cocuk">Çocuk sayısı (0–11 yaş)</label>
+          <input type="number" id="cocuk" min="0" value="0">
+          <span class="note">Çocuklar için %50 indirim uygulanır.</span>
+        </div>
+
+        <div class="field">
+          <label>Ek aktiviteler</label>
+          <div class="extras">
+            <label><input type="checkbox" class="ekstra" value="rafting"> Rafting</label>
+            <label><input type="checkbox" class="ekstra" value="yemek"> Akşam yemeği paketi</label>
+            <label><input type="checkbox" class="ekstra" value="ingilizce"> İngilizce rehber</label>
+          </div>
+          <span class="note">Ekstralar kişi başı fiyatlandırılır.</span>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="calc-btn" onclick="fiyatHesapla()">Calculate price</button>
+      </div>
+    </section>
+
+    <section class="result-box" id="sonucKutusu">
+      <div class="result-title">Result</div>
+      <p id="ozetSatiri"></p>
+      <p id="rotaSatiri"></p>
+      <p id="konaklamaSatiri"></p>
+      <p id="ulasimSatiri"></p>
+      <p id="ekstraSatiri"></p>
+      <p id="gunlukYetiskinSatiri"></p>
+      <p id="gunlukCocukSatiri"></p>
+      <p id="toplamSatiri" class="highlight"></p>
+      <p id="kisiBasiSatiri" class="kisi-basi"></p>
+    </section>
+  </main>
+
+  <script>
+    /* Her rota için kişi başı günlük temel fiyat */
+    const rotaFiyatlari = {
+      klasik: 2000,
+      yayla: 2300,
+      batum: 2600,
+      Ankara: 1500,
+      "Anıtkabir Turu": 900,
+      Beypazarı: 1100,
+      Haymana: 1200
+    };
+
+    const konaklamaEkstra = { standart: 0, butik: 300, bungalov: 500 };
+    const ulasimEkstra = { otobus: 0, ucak: 1500 };
+    const ekstraFiyatlari = { rafting: 400, yemek: 350, ingilizce: 250 };
+
+    function fiyatHesapla() {
+      // Tur süresi (gün) — eğer formda ayrı bir alan yoksa sabit kalabilir
+      const gun = 3;
+
+      const rota = document.getElementById("rota").value;
+      const konaklama = document.getElementById("konaklama").value;
+      const ulasim = document.getElementById("ulasim").value;
+
+      const yetiskin = Number(document.getElementById("yetiskin").value);
+      const cocuk = Number(document.getElementById("cocuk").value);
+
+      const ekstraCheckleri = document.querySelectorAll(".ekstra:checked");
+
+      if (yetiskin <= 0) {
+        alert("En az 1 yetişkin girmelisiniz.");
+        return;
+      }
+      if (cocuk < 0) {
+        alert("Çocuk sayısı negatif olamaz.");
+        return;
+      }
+
+      const kisiToplam = yetiskin + cocuk;
+
+      // Parçalı maliyetler
+      const rotaGunluk = rotaFiyatlari[rota];                 // kişi başı / gün
+      const konaklamaGunluk = konaklamaEkstra[konaklama];     // kişi başı / gün (seçime göre fark)
+      const ulasimTekSefer = ulasimEkstra[ulasim];            // kişi başı / tek sefer
+      let ekstraTekSefer = 0;                                 // kişi başı / tek sefer
+      const ekstraIsimleri = [];
+
+      ekstraCheckleri.forEach(cb => {
+        ekstraTekSefer += ekstraFiyatlari[cb.value];
+        if (cb.value === "rafting") ekstraIsimleri.push("Rafting");
+        if (cb.value === "yemek") ekstraIsimleri.push("Akşam yemeği");
+        if (cb.value === "ingilizce") ekstraIsimleri.push("İngilizce rehber");
+      });
+
+      // Yetişkin toplam (kişi başı): (günlük maliyetler * gün) + tek seferlikler
+      const yetiskinKisiBasiToplam =
+        (rotaGunluk + konaklamaGunluk) * gun + ulasimTekSefer + ekstraTekSefer;
+
+      // Çocuk indirimi: %50
+      const cocukKisiBasiToplam = yetiskinKisiBasiToplam * 0.5;
+
+      const toplamYetiskin = yetiskin * yetiskinKisiBasiToplam;
+      const toplamCocuk = cocuk * cocukKisiBasiToplam;
+
+      const genelToplam = toplamYetiskin + toplamCocuk;
+
+      // Ortalama maliyet (toplam kişi sayısına bölerek)
+      const kisiBasiOrtalamaToplam = genelToplam / kisiToplam;
+      const kisiBasiOrtalamaGunluk = kisiBasiOrtalamaToplam / gun;
+
+      // İsim haritaları
+      const rotaIsimleri = {
+        klasik: "Doğu Karadeniz Klasik",
+        yayla: "Yayla & Doğa Turu",
+        batum: "Karadeniz + Batum Turu",
+        Ankara: "Ankara Şehir Turu",
+        "Anıtkabir Turu": "Anıtkabir Turu",
+        Beypazarı: "Beypazarı Turu",
+        Haymana: "Haymana Kaplıca Turu"
+      };
+
+      const konaklamaIsimleri = {
+        standart: "Standart otel",
+        butik: "Butik otel",
+        bungalov: "Bungalov ev"
+      };
+
+      const ulasimIsimleri = {
+        otobus: "Otobüs (Ankara çıkışlı)",
+        ucak: "Uçak + transfer"
+      };
+
+      // Sonuçları yazdır
+      document.getElementById("ozetSatiri").textContent =
+        `${yetiskin} yetişkin ve ${cocuk} çocuk (toplam ${kisiToplam} kişi) seçtiniz.`;
+
+      document.getElementById("rotaSatiri").textContent =
+        `Rota: ${rotaIsimleri[rota]} — kişi başı günlük: ${rotaGunluk.toLocaleString("tr-TR")} ₺ (toplam ${gun} gün)`;
+
+      document.getElementById("konaklamaSatiri").textContent =
+        `Konaklama: ${konaklamaIsimleri[konaklama]} — kişi başı günlük fark: ${konaklamaGunluk.toLocaleString("tr-TR")} ₺`;
+
+      document.getElementById("ulasimSatiri").textContent =
+        `Ulaşım: ${ulasimIsimleri[ulasim]} — kişi başı tek sefer: ${ulasimTekSefer.toLocaleString("tr-TR")} ₺`;
+
+      if (ekstraIsimleri.length > 0) {
+        document.getElementById("ekstraSatiri").textContent =
+          `Ek aktiviteler: ${ekstraIsimleri.join(", ")} — kişi başı tek sefer: ${ekstraTekSefer.toLocaleString("tr-TR")} ₺`;
+      } else {
+        document.getElementById("ekstraSatiri").textContent = "Ek aktivite seçilmedi.";
+      }
+
+      document.getElementById("toplamSatiri").textContent =
+        `Genel toplam: ${genelToplam.toLocaleString("tr-TR")} ₺ (Yetişkin kişi başı: ${yetiskinKisiBasiToplam.toLocaleString("tr-TR")} ₺, Çocuk kişi başı: ${cocukKisiBasiToplam.toLocaleString("tr-TR")} ₺)`;
+
+      document.getElementById("kisiBasiSatiri").textContent =
+        `Kişi başı ortalama: ${kisiBasiOrtalamaToplam.toLocaleString("tr-TR")} ₺ (günlük ortalama: ${kisiBasiOrtalamaGunluk.toLocaleString("tr-TR")} ₺)`;
+
+      document.getElementById("sonucKutusu").style.display = "block";
+    }
+  </script>
+</body>
+</html>
