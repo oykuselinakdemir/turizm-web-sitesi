@@ -1,46 +1,113 @@
-# turizm web sitesi
-Frontend tourism website project built with HTML, CSS and JavaScript.
-# Tourism Promotion Website
+![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 
-This project was developed as a frontend practice project.
+![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-## About the Project
-The website is designed to promote tourism destinations with a simple and user-friendly interface.
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-## Technologies Used
-- HTML
-- CSS
-- JavaScript
+# Turkey Tourism Website
 
-## Purpose
-To improve my frontend development skills and practice basic web design principles.
+A responsive multi-page tourism website developed using HTML, CSS and JavaScript.
+
+This project was developed as part of a university web development course. It focuses on creating a modern tourism website with responsive layouts and interactive JavaScript features, including a travel cost calculator.
+
+---
 
 ## Features
-- Multi-page website structure
-- Navigation menu
-- Interactive elements with JavaScript
+
+- Responsive multi-page website
+- Interactive travel cost calculator
+- Transportation selection
+- Accommodation selection
+- Dynamic price calculation
+- Destination pages
+- Contact page
+- Modern user interface
+- Clean navigation structure
+
+---
+
+## Technologies
+
+- HTML5
+- CSS3
+- JavaScript
+
+---
+
 ## Project Structure
-The website consists of 10 different pages including:
-- Home
-- About
-- Routes
-- Included
-- Calculator
-- Food
-- Team
-- FAQ
-- Contacts
-- Book
+
+```
+Tourism Website
+│
+├── Home
+├── About
+├── Routes
+├── Included
+├── Calculator
+├── Food
+├── Team
+├── FAQ
+├── Contact
+└── Book
+```
+
+---
+
 ## Screenshots
-![Page 1](page1.png)
-![Page 2](page2.png)
-![Page 3](page3.png)
-![Page 4](page4.png)
-![Page 5](page5.png)
-![Page 6](page6.png)
-![Page 7](page7.png)
-![Page 8](page8.png)
-![Page 9](page9.png)
-![Page 10](page10.png)
-![Page 11](page11.png)
-![Page 12](page12.png)
+
+## Screenshots
+
+| Home | About |
+|------|------|
+| ![](page1.png) | ![](page2.png) |
+
+| Routes | Included |
+|------|------|
+| ![](page3.png) | ![](page4.png) |
+
+| Calculator | Food |
+|------|------|
+| ![](page5.png) | ![](page6.png) |
+
+| Team | FAQ |
+|------|------|
+| ![](page7.png) | ![](page8.png) |
+
+| Contact | Book |
+|------|------|
+| ![](page9.png) | ![](page10.png) |
+
+---
+## How to Run
+
+1. Clone the repository.
+
+```bash
+git clone https://github.com/USERNAME/REPOSITORY.git
+```
+
+2. Open `index.html` in your web browser.
+
+No additional installation is required.
+
+## Learning Outcomes
+
+During this project I improved my skills in:
+
+- HTML5
+- CSS3
+- JavaScript
+- Responsive Web Design
+- DOM Manipulation
+- UI Design
+- Multi-page Website Development
+
+---
+
+## Author
+
+**Öykü Selin Akdemir**
+
+Technology and Information Management Student
+
+Başkent University
